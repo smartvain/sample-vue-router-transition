@@ -17,10 +17,28 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
-  <RouterView />
+  <RouterView v-slot="{ Component, route }">
+    <transition
+      :enter-active-class="route.meta.enterClass"
+      :leave-active-class="route.meta.leaveClass"
+      mode="out-in"
+    >
+      <component :is="Component" />
+    </transition>
+  </RouterView>
 </template>
 
 <style scoped>
+/* .fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s ease-out;
+} */
+
 header {
   line-height: 1.5;
   max-height: 100vh;
